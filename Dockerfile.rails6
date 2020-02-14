@@ -1,9 +1,5 @@
 FROM docker.pkg.github.com/kollegorna/asdf-docker/alpine:latest
 
-COPY versions/asdf_plugins /build/versions/asdf_plugins
-COPY versions/nodejs /build/versions/nodejs
-COPY versions/ruby /build/versions/ruby
-
 USER root
 RUN apk --update add --no-cache --virtual run-dependencies build-base tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev readline-dev
 
@@ -12,7 +8,13 @@ RUN echo "bundler" >> /asdf/.default-gems
 RUN echo "legacy_version_file = yes" >> /asdf/.asdfrc
 
 # install plugins
-RUN /build/scripts/install_plugins.sh
+RUN asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+RUN asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+RUN asdf plugin-add yarn https://github.com/twuni/asdf-yarn.git
+
+# Install nodejs keyring
+RUN chmod +x /asdf/.asdf/plugins/nodejs/bin/import-release-team-keyring
+RUN bash /asdf/.asdf/plugins/nodejs/bin/import-release-team-keyring
 
 # install versions
 RUN asdf install nodejs 12.9.0
