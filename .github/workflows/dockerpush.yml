@@ -29,10 +29,10 @@ jobs:
         run: |
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$VERSION
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}
 
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          docker tag image $IMAGE_ID:latest
-          docker push $IMAGE_ID:latest
+          docker tag image $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
