@@ -1,0 +1,40 @@
+FROM alpine:3.9
+
+# Versions
+ENV ASDF_VERSION "v0.7.6"
+
+# ENV stuff
+ENV TIMEZONE "UTC"
+
+RUN mkdir /build
+COPY scripts/install_plugins.sh /build/scripts/install_plugins.sh
+COPY versions/asdf_plugins /build/versions/asdf_plugins
+
+USER root
+RUN apk add --update --no-cache autoconf automake bash curl alpine-sdk perl imagemagick openssl openssl-dev ncurses ncurses-dev unixodbc unixodbc-dev git ca-certificates tzdata coreutils
+RUN cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+RUN apk add curl make gcc g++ python linux-headers binutils-gold gnupg perl-utils libstdc++
+RUN apk add --update rsync
+RUN apk add openssh-client gawk grep yaml-dev expat-dev libxml2-dev util-linux
+
+
+SHELL ["/bin/bash", "-l", "-c"]
+RUN adduser -s /bin/bash -h /asdf -D asdf
+
+USER asdf
+WORKDIR /asdf
+ENV PATH="${PATH}:/asdf/.asdf/shims:/asdf/.asdf/bin"
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch $ASDF_VERSION
+RUN echo -e '\n. /asdf/.asdf/asdf.sh' >> ~/.bashrc && \
+    echo -e '\n. /asdf/.asdf/asdf.sh' >> ~/.profile && \
+    source ~/.bashrc
+
+# Adding plugins
+#USER root
+RUN chmod +x /asdf/.asdf/asdf.sh
+WORKDIR /build
+RUN $HOME/.asdf/asdf.sh
+RUN /build/scripts/install_plugins.sh
+RUN asdf plugin-list
+
+CMD ["/bin/bash"]
