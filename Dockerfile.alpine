@@ -34,7 +34,5 @@ RUN echo -e '\n. /asdf/.asdf/asdf.sh' >> ~/.bashrc && \
 RUN chmod +x /asdf/.asdf/asdf.sh
 WORKDIR /build
 RUN $HOME/.asdf/asdf.sh
-RUN /build/scripts/install_plugins.sh
-RUN asdf plugin-list
 
 CMD ["/bin/bash"]
