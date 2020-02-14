@@ -11,10 +11,11 @@ USER asdf
 RUN echo "bundler" >> /asdf/.default-gems
 RUN echo "legacy_version_file = yes" >> /asdf/.asdfrc
 
-# rails6 uses nodejs 12
-RUN asdf install nodejs 12.15.0
+# install plugins
+RUN /build/scripts/install_plugins.sh
 
-# install rubies
+# install versions
+RUN /build/scripts/install_versions.sh nodejs
 RUN /build/scripts/install_versions.sh ruby
 
 CMD ["/bin/sh"]
