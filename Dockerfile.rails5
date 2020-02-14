@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/kollegorna/asdf-docker:alpine
+FROM docker.pkg.github.com/kollegorna/asdf-docker/alpine:latest
 
 COPY scripts/install_versions.sh /build/scripts/install_versions.sh
 COPY versions/nodejs /build/versions/nodejs
