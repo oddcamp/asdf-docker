@@ -2,6 +2,8 @@ FROM docker.pkg.github.com/kollegorna/asdf-docker/alpine:latest
 
 ENV NODE_VERSION="12.9.0"
 ENV RUBY_VERSION="2.6.4"
+ENV NODEJS_ORG_MIRROR=https://unofficial-builds.nodejs.org/download/release/
+ENV NODEJS_CHECK_SIGNATURES=no
 
 USER root
 RUN apk --update add --no-cache --virtual run-dependencies build-base tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev readline-dev
@@ -14,7 +16,7 @@ RUN echo "legacy_version_file = yes" >> /asdf/.asdfrc
 
 # install plugins
 RUN asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-RUN asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+RUN asdf plugin-add nodejs https://github.com/jnylen/asdf-nodejs.git
 RUN asdf plugin-add yarn https://github.com/twuni/asdf-yarn.git
 
 # Install nodejs keyring
