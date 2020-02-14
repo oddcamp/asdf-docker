@@ -8,7 +8,7 @@ ENV TIMEZONE "UTC"
 
 RUN mkdir /build
 COPY scripts/install_plugins.sh /build/scripts/install_plugins.sh
-COPY versions/asdf_plugins /build/versions/asdf_plugins
+COPY scripts/install_versions.sh /build/scripts/install_versions.sh
 
 USER root
 RUN apk add --update --no-cache autoconf automake bash curl alpine-sdk perl imagemagick openssl openssl-dev ncurses ncurses-dev unixodbc unixodbc-dev git ca-certificates tzdata coreutils
