@@ -1,7 +1,12 @@
 FROM docker.pkg.github.com/kollegorna/asdf-docker/alpine:latest
 
+ENV NODE_VERSION="12.9.0"
+ENV RUBY_VERSION="2.6.4"
+
 USER root
 RUN apk --update add --no-cache --virtual run-dependencies build-base tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev readline-dev
+
+RUN apk --update add --no-cache --virtual curl make gcc g++ python linux-headers binutils-gold gnupg perl-utils libstdc++
 
 USER asdf
 RUN echo "bundler" >> /asdf/.default-gems
@@ -17,7 +22,15 @@ RUN chmod +x /asdf/.asdf/plugins/nodejs/bin/import-release-team-keyring
 RUN bash /asdf/.asdf/plugins/nodejs/bin/import-release-team-keyring
 
 # install versions
-RUN asdf install nodejs 12.9.0
-RUN asdf install ruby 2.6.4
+RUN asdf install nodejs $NODE_VERSION
+RUN asdf install ruby $RUBY_VERSION
 
-CMD ["/bin/sh"]
+# globalize
+RUN asdf global nodejs $NODE_VERSION
+RUN asdf global ruby $RUBY_VERSION
+
+# Works?
+RUN node -v
+RUN ruby -v
+
+CMD ["/bin/bash"]
