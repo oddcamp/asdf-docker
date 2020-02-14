@@ -9,6 +9,8 @@ on:
 
 env:
   IMAGE_NAME: asdf-docker
+
+jobs:
   push:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
