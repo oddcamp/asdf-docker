@@ -23,7 +23,7 @@ jobs:
           docker build . --file Dockerfile.$VERSION --tag image
 
       - name: Log into registry
-        run: echo "${{ secrets.GPR_AUTH_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.GPR_AUTH_TOKEN }}" | docker login docker.pkg.github.com -u k-deployer --password-stdin
 
       - name: Push image
         run: |
