@@ -1,5 +1,6 @@
 FROM docker.pkg.github.com/kollegorna/asdf-docker/alpine:latest
 
+COPY versions/asdf_plugins /build/versions/asdf_plugins
 COPY versions/nodejs /build/versions/nodejs
 COPY versions/ruby /build/versions/ruby
 
