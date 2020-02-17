@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM ubuntu:latest
 
 # Versions
 ENV ASDF_VERSION "v0.7.6"
@@ -11,15 +11,14 @@ COPY scripts/install_plugins.sh /build/scripts/install_plugins.sh
 COPY scripts/install_versions.sh /build/scripts/install_versions.sh
 
 USER root
-RUN apk add --update --no-cache autoconf automake bash curl alpine-sdk perl imagemagick openssl openssl-dev ncurses ncurses-dev unixodbc unixodbc-dev git ca-certificates tzdata coreutils
-RUN cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
-RUN apk add curl make gcc g++ python linux-headers binutils-gold gnupg perl-utils libstdc++
-RUN apk add --update rsync
-RUN apk add openssh-client gawk grep yaml-dev expat-dev libxml2-dev util-linux
+RUN apt-get update -y
+RUN apt-get install -y --no-install-recommends autoconf automake bash curl perl imagemagick openssl ncurses-dev unixodbc unixodbc-dev git ca-certificates coreutils
+RUN apt-get install -y --no-install-recommends curl make gcc g++ python binutils-gold gnupg
+RUN apt-get install -y --no-install-recommends openssh-client gawk grep libxml2-dev util-linux
 
 
 SHELL ["/bin/bash", "-l", "-c"]
-RUN adduser -s /bin/bash -h /asdf -D asdf
+RUN adduser --shell /bin/bash --home /asdf --gecos '' --disabled-password asdf
 
 USER asdf
 WORKDIR /asdf
