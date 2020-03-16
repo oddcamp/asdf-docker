@@ -3,7 +3,8 @@ FROM docker.pkg.github.com/kollegorna/asdf-docker/ubuntu:latest
 ENV RUBY_VERSION="2.6.5"
 
 USER root
-RUN apt-get install -y libpq5 postgresql-client
+RUN apt-get update
+RUN apt-get install -y pkg-config libpq5 libpq-dev postgresql-client
 RUN apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev
 
 USER asdf
