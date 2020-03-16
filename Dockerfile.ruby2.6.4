@@ -1,8 +1,6 @@
 FROM docker.pkg.github.com/kollegorna/asdf-docker/ubuntu:latest
 
-ENV NODE_VERSION="12.9.0"
 ENV RUBY_VERSION="2.6.4"
-ENV NODEJS_ORG_MIRROR=https://nodejs.org/download/release/
 
 USER root
 RUN apt-get install -y libpq5 postgresql-client
@@ -22,15 +20,12 @@ RUN chmod +x /asdf/.asdf/plugins/nodejs/bin/import-release-team-keyring
 RUN bash /asdf/.asdf/plugins/nodejs/bin/import-release-team-keyring
 
 # install versions
-RUN asdf install nodejs $NODE_VERSION
 RUN asdf install ruby $RUBY_VERSION
 
 # globalize
-RUN asdf global nodejs $NODE_VERSION
 RUN asdf global ruby $RUBY_VERSION
 
 # Works?
-RUN node -v
 RUN ruby -v
 
 CMD ["/bin/bash"]
