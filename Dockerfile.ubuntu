@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:rolling
 
 # Versions
 ENV ASDF_VERSION "v0.7.6"
