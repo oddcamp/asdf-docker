@@ -1,6 +1,6 @@
 FROM docker.pkg.github.com/kollegorna/asdf-docker/ubuntu:latest
 
-ENV RUBY_VERSION="2.6.6"
+ENV RUBY_VERSION="2.7.1"
 
 USER root
 RUN apt-get update
