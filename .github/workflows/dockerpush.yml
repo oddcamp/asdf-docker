@@ -20,13 +20,16 @@ jobs:
 
       - name: Build image
         run: |
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$VERSION
-          docker build . --file ./Dockerfile.$VERSION --tag $IMAGE_ID:latest
+          GIT_NAME=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          IMAGE_NAME=$(echo "$GIT_NAME" | cut -d"/" -f1)
+          IMAGE_VERSION=$(echo "$GIT_NAME" | cut -d"/" -f2)
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          docker build . --file ./Dockerfile.$GIT_NAME --tag $IMAGE_ID:$IMAGE_VERSION
 
       - name: Push image
         run: |
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$VERSION
-          docker push $IMAGE_ID:latest
+          GIT_NAME=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          IMAGE_NAME=$(echo "$GIT_NAME" | cut -d"/" -f1)
+          IMAGE_VERSION=$(echo "$GIT_NAME" | cut -d"/" -f2)
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          docker push $IMAGE_ID:$IMAGE_VERSION
