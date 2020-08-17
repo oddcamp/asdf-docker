@@ -39,8 +39,6 @@ RUN gem install bundler
 
 # Needs to be run inside of the folder that has .tool-versions
 RUN npm config set @kollegorna:registry https://npm.pkg.github.com/
-RUN bundle config github.com ${GITHUB_ACCESS_TOKEN}:x-oauth-basic
-RUN bundle config rubygems.pkg.github.com ${GITHUB_ACCESS_TOKEN}:x-oauth-basic
 RUN echo "//npm.pkg.github.com/:_authToken=${GITHUB_ACCESS_TOKEN}" >> ~/.npmrc
 
 # Needed due to docker volumes only give you root:root chown by default.
@@ -54,7 +52,13 @@ Use our standardized `Dockerfile` and it should grab the version from `.tool-ver
 
 If you change the version at anytime you will have to rebuild the image as that is built on build.
 
-## Ruby images
+### Versions
+
+Versions is handled by `asdf` so any version you use in your `.tool-versions` will be used and downloaded on build.
+
+Use the `FROM` image such as `FROM docker.pkg.github.com/kollegorna/asdf-docker/nodejs:latest`.
+
+## Ruby
 
 Ruby doesn't provide a good way of just downloading an executable like how NodeJS does it. So we have several images with different ruby versions that have Ruby pre-compiled.
 
@@ -64,8 +68,22 @@ A new project **should always** use the latest Rails-supported version.
 
 Currently supported versions:
 
-* 2.4.9 (end of life march 2020)
-* 2.6.4
-* 2.6.5
-* 2.6.6
-* 2.7.1
+- 2.4.9 (end of life march 2020)
+- 2.6.4
+- 2.6.5
+- 2.6.6
+- 2.7.1
+
+Use the `FROM` image such as `FROM docker.pkg.github.com/kollegorna/asdf-docker/ruby:2.7.1`.
+
+### Bundler and Github Private Packages
+
+If you are using a private package on Github in your bundler-based projects you can use these environment variables in your `docker-compose.yml` file:
+
+```
+    environment:
+      BUNDLE_GITHUB__COM: "${GITHUB_ACCESS_TOKEN}:x-oauth-basic"
+      BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "${GITHUB_ACCESS_TOKEN}:x-oauth-basic"
+```
+
+That way you wouldn't need to rebuild the whole image if you missed setting up the `GITHUB_ACCESS_TOKEN` environment variable.
