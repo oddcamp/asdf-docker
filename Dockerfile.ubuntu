@@ -1,4 +1,4 @@
-FROM ubuntu:rolling
+FROM ubuntu:hirsute
 
 # Versions
 ENV ASDF_VERSION "v0.7.6"
