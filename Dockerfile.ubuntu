@@ -1,4 +1,4 @@
-FROM ubuntu:hirsute
+FROM ubuntu:latest
 
 # Versions
 ENV ASDF_VERSION "v0.8.0"

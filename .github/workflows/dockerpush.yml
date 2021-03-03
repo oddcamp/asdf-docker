@@ -20,7 +20,7 @@ jobs:
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$VERSION
 
-          docker build . --file ./Dockerfile.$VERSION --tag $IMAGE_ID:latest
+          docker build . --file ./Dockerfile.$VERSION --tag $IMAGE_ID:latest --no-cache --force-rm
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
