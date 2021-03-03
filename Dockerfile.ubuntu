@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 # Versions
 ENV ASDF_VERSION "v0.8.0"
