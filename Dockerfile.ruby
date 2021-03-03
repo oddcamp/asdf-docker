@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/kollegorna/asdf-docker/ubuntu:latest
+FROM docker.pkg.github.com/oddcamp/asdf-docker/ubuntu:latest
 
 ENV RUBY_VERSION="2.7.2"
 
