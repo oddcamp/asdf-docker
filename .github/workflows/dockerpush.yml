@@ -24,7 +24,7 @@ jobs:
           IMAGE_NAME=$(echo "$GIT_NAME" | cut -d"/" -f1)
           IMAGE_VERSION=$(echo "$GIT_NAME" | cut -d"/" -f2)
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
-          docker build . --file ./Dockerfile.$IMAGE_NAME --tag $IMAGE_ID:$IMAGE_VERSION
+          docker build . --file ./Dockerfile.$IMAGE_NAME --tag $IMAGE_ID:$IMAGE_VERSION --no-cache --force-rm
 
       - name: Push image
         run: |
