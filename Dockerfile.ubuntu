@@ -4,7 +4,8 @@ FROM ubuntu:20.04
 ENV ASDF_VERSION "v0.8.0"
 
 # ENV stuff
-ENV TIMEZONE "UTC"
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
 
 RUN mkdir /build
 COPY scripts/install_plugins.sh /build/scripts/install_plugins.sh
