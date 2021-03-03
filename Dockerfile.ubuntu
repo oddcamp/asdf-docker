@@ -1,7 +1,7 @@
 FROM ubuntu:hirsute
 
 # Versions
-ENV ASDF_VERSION "v0.7.6"
+ENV ASDF_VERSION "v0.8.0"
 
 # ENV stuff
 ENV TIMEZONE "UTC"
@@ -13,7 +13,7 @@ COPY scripts/install_versions.sh /build/scripts/install_versions.sh
 USER root
 RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends autoconf automake bash curl perl imagemagick openssl ncurses-dev unixodbc unixodbc-dev git ca-certificates coreutils
-RUN apt-get install -y --no-install-recommends curl make gcc g++ python binutils-gold gnupg
+RUN apt-get install -y --no-install-recommends curl wget make gcc g++ python binutils-gold gnupg
 RUN apt-get install -y --no-install-recommends openssh-client gawk grep libxml2-dev util-linux
 
 
