@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM docker.io/library/ubuntu:20.04
 
 # Versions
 ENV ASDF_VERSION "v0.8.0"
@@ -8,8 +8,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 
 RUN mkdir /build
-COPY scripts/install_plugins.sh /build/scripts/install_plugins.sh
-COPY scripts/install_versions.sh /build/scripts/install_versions.sh
 
 USER root
 RUN apt-get update -y
