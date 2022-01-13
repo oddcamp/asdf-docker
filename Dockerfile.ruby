@@ -16,10 +16,6 @@ RUN asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 RUN asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 RUN asdf plugin-add yarn https://github.com/twuni/asdf-yarn.git
 
-# Install nodejs keyring
-RUN chmod +x /asdf/.asdf/plugins/nodejs/bin/import-release-team-keyring
-RUN bash /asdf/.asdf/plugins/nodejs/bin/import-release-team-keyring
-
 # install versions
 RUN asdf install ruby $RUBY_VERSION
 
