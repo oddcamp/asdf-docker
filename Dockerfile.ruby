@@ -1,6 +1,6 @@
 FROM docker.pkg.github.com/oddcamp/asdf-docker/ubuntu:latest
 
-ENV RUBY_VERSION="2.7.3"
+ENV RUBY_VERSION="3.0.3"
 
 USER root
 RUN apt-get update
