@@ -1,13 +1,13 @@
-# Kollegorna asdf Docker Image
+# Odd Camp asdf Docker Image
 
 This docker image(s) are used in our development environments. We use [asdf](https://asdf-vm.com/) to be able to switch node/yarn versions with ease.
 
 ## Dockerfile
 
-Here is the standardized `Dockerfile` (it changes between language and projects though) we use here at [Kollegorna](https://kollegorna.se):
+Here is the standardized `Dockerfile` (it changes between language and projects though) we use here at [Odd Camp](https://www.oddcamp.com):
 
 ```Docker
-FROM docker.pkg.github.com/kollegorna/asdf-docker/ruby:2.7.1
+FROM docker.pkg.github.com/oddcamp/asdf-docker/ruby:2.7.1
 
 # Setup environment variables that will be available to the instance
 ARG GITHUB_ACCESS_TOKEN
@@ -56,7 +56,7 @@ If you change the version at anytime you will have to rebuild the image as that 
 
 Versions is handled by `asdf` so any version you use in your `.tool-versions` will be used and downloaded on build.
 
-Use the `FROM` image such as `FROM docker.pkg.github.com/kollegorna/asdf-docker/nodejs:latest`.
+Use the `FROM` image such as `FROM docker.pkg.github.com/oddcamp/asdf-docker/nodejs:latest`.
 
 ## Ruby
 
@@ -73,8 +73,12 @@ Currently supported versions:
 - 2.6.5
 - 2.6.6
 - 2.7.1
+- 2.7.2
+- 2.7.3
+- 3.0.3
+- 3.1.0
 
-Use the `FROM` image such as `FROM docker.pkg.github.com/kollegorna/asdf-docker/ruby:2.7.1`.
+Use the `FROM` image such as `FROM docker.pkg.github.com/oddcamp/asdf-docker/ruby:2.7.1`.
 
 ### Bundler and Github Private Packages
 
